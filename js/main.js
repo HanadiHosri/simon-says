@@ -66,5 +66,13 @@ function changeColorOpacity() {
 
 function getSound() {
 
-}
+};
 
+function handleTileClick(clickedColor) {
+    const correctColor = colorsOrder.shift(); // the shift method removes and returns the first element of colorsOrder
+    if (clickedColor == correctColor) {
+        addRandomColor()
+    } else {
+        //restart the game
+    };
+};
