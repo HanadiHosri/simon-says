@@ -1,4 +1,4 @@
-const colorsOrder = [];
+let colorsOrder = [];
 const start = document.getElementById("play");
 const greenTile = document.querySelector(".tile.green.inactive");
 const redTile = document.querySelector(".tile.red.inactive");
@@ -12,7 +12,11 @@ start.addEventListener("click", function() {
     getSound();
 });
 
+const element = document.querySelector(".board");
+element.classList.remove("unclickable");
+
 greenTile.addEventListener("click", function() {
+    console.log("inside event listener")
     handleTileClick("green");
 });
 
@@ -69,10 +73,14 @@ function getSound() {
 };
 
 function handleTileClick(clickedColor) {
+    console.log(clickedColor);
     const correctColor = colorsOrder.shift(); // the shift method removes and returns the first element of colorsOrder
-    if (clickedColor == correctColor) {
-        addRandomColor()
+    console.log(correctColor);
+    if (clickedColor == correctColor) {       
+        addRandomColor();
+        changeColorOpacity();
     } else {
-        //restart the game
+        //game over sound
+        colorsOrder = [];
     };
 };
