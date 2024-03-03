@@ -23,15 +23,27 @@ function changeColorOpacity() {
     for (let i = 0; i < colorsOrder.length; i++) {
         if (colorsOrder[i] == "green") {
             greenTile.style.opacity = 1;
+            setTimeout(() => {
+                greenTile.style.opacity = 0.35;
+            }, 2000);
         }
         else if (colorsOrder[i] == "red") {
             redTile.style.opacity = 1;
+            setTimeout(() => {
+                redTile.style.opacity = 0.35;
+            }, 2000);
         }
         else if (colorsOrder[i] == "blue") {
             blueTile.style.opacity = 1;
+            setTimeout(() => {
+                blueTile.style.opacity = 0.35;
+            }, 2000);
         }
         else if (colorsOrder[i] == "yellow") {
             yellowTile.style.opacity = 1;
+            setTimeout(() => {
+                yellowTile.style.opacity = 0.35;
+            }, 2000);
         }
     }
 };
