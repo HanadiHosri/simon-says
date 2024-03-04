@@ -94,11 +94,7 @@ function areEqualArrays(array1, array2) {
 
 function checkUserChoice() {
     if (areEqualArrays(colorsOrder, userOrder)) {
-        levelNumber ++;
-        level.innerHTML = levelNumber.toString();
-        highscoreNumber += 10
-        highscore.innerHTML = highscoreNumber.toString();
-        addRandomColor()
+        startNextLevel();
     } else {
         colorsOrder = [];
         userOrder = [];
@@ -106,3 +102,12 @@ function checkUserChoice() {
         highscore.innerHTML = "0";
     }
 };
+
+function startNextLevel() {
+    levelNumber ++;
+    level.innerHTML = levelNumber.toString();
+    highscoreNumber += 10
+    highscore.innerHTML = highscoreNumber.toString();
+    userOrder = [];
+    addRandomColor();
+}
