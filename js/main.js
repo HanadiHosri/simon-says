@@ -22,21 +22,25 @@ element.classList.remove("unclickable");
 greenTile.addEventListener("click", function() {
     changeColorOpacity("green");
     userOrder.push("green");
+    checkUserChoice();
 });
 
 redTile.addEventListener("click", function() {
     changeColorOpacity("red");
     userOrder.push("red");
+    checkUserChoice();
 });
 
 blueTile.addEventListener("click", function() {
     changeColorOpacity("blue");
     userOrder.push("blue");
+    checkUserChoice();
 });
 
 yellowTile.addEventListener("click", function() {
     changeColorOpacity("yellow");
     userOrder.push("yellow");
+    checkUserChoice();
 });
 
 function addRandomColor() {
@@ -75,6 +79,30 @@ function getSound() {
 
 };
 
-function checkUserChoice(chosenColor) {
+function areEqualArrays(array1, array2) {
+    if (array1.length !== array2.length) {
+        return false;
+    } else {
+        for (let i = 0; i < array1.length; i++) {
+            if (array1[i] !== array2[i]) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
 
+function checkUserChoice() {
+    if (areEqualArrays(colorsOrder, userOrder)) {
+        levelNumber ++;
+        level.innerHTML = levelNumber.toString();
+        highscoreNumber += 10
+        highscore.innerHTML = highscoreNumber.toString();
+        addRandomColor()
+    } else {
+        colorsOrder = [];
+        userOrder = [];
+        level.innerHTML = "1";
+        highscore.innerHTML = "0";
+    }
 };
