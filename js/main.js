@@ -1,6 +1,8 @@
 let colorsOrder = [];
 let highscore = document.getElementById("high-score");
 let level = document.getElementById("level");
+let highscoreNumber = 0;
+let levelNumber = 1;
 const start = document.getElementById("play");
 const greenTile = document.querySelector(".tile.green.inactive");
 const redTile = document.querySelector(".tile.red.inactive");
@@ -9,7 +11,7 @@ const yellowTile = document.querySelector(".tile.yellow.inactive");
 
 
 start.addEventListener("click", function() {
-    level.innerHTML = 1;
+    level.innerHTML = levelNumber.toString();
     addRandomColor();
     changeColorOpacity()
     getSound();
@@ -19,7 +21,6 @@ const element = document.querySelector(".board");
 element.classList.remove("unclickable");
 
 greenTile.addEventListener("click", function() {
-    console.log("inside event listener")
     handleTileClick("green");
 });
 
@@ -42,32 +43,27 @@ function addRandomColor() {
     
 };
 
-function changeColorOpacity() {
-    for (let i = 0; i < colorsOrder.length; i++) {
-        if (colorsOrder[i] == "green") {
-            greenTile.style.opacity = 1;
-            setTimeout(() => {
-                greenTile.style.opacity = 0.35;
-            }, 2000);
-        }
-        else if (colorsOrder[i] == "red") {
-            redTile.style.opacity = 1;
-            setTimeout(() => {
-                redTile.style.opacity = 0.35;
-            }, 2000);
-        }
-        else if (colorsOrder[i] == "blue") {
-            blueTile.style.opacity = 1;
-            setTimeout(() => {
-                blueTile.style.opacity = 0.35;
-            }, 2000);
-        }
-        else if (colorsOrder[i] == "yellow") {
-            yellowTile.style.opacity = 1;
-            setTimeout(() => {
-                yellowTile.style.opacity = 0.35;
-            }, 2000);
-        };
+function changeColorOpacity(color) {
+    if (color == "green"){
+        greenTile.style.opacity = 1;
+        setTimeout(() => {
+            greenTile.style.opacity = 0.35;
+        }, 1000);
+    } else if (color == "red"){
+        redTile.style.opacity = 1;
+        setTimeout(() => {
+            redTile.style.opacity = 0.35;
+        }, 1000);
+    } else if (color == "blue"){
+        blueTile.style.opacity = 1;
+        setTimeout(() => {
+            blueTile.style.opacity = 0.35;
+        }, 1000);
+    } else if (color == "yellow"){
+        yellowTile.style.opacity = 1;
+        setTimeout(() => {
+            yellowTile.style.opacity = 0.35;
+        }, 1000);
     };
 };
 
@@ -76,21 +72,5 @@ function getSound() {
 };
 
 function handleTileClick(clickedColor) {
-    for (let i = 0; i < colorsOrder.length; i++) {
-        console.log(clickedColor);
-        const correctColor = colorsOrder[i];
-        console.log(correctColor);
-        if (clickedColor == correctColor) { 
-            level ++;
-            highscore += 10;
-            addRandomColor();
-            changeColorOpacity();
-            
-        } else {
-            //wrong sound
-            //game over sound
-            colorsOrder = [];
-        };
-    }
 
-};
+}
