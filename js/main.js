@@ -10,12 +10,10 @@ const redTile = document.querySelector(".tile.red.inactive");
 const blueTile = document.querySelector(".tile.blue.inactive");
 const yellowTile = document.querySelector(".tile.yellow.inactive");
 
-const greenAudio = document.createElement('audio');
-greenAudio.id = 'audio-player';
-greenAudio.autoplay = true;
-greenAudio.src = '../simon-says/sounds/green.mp3';
-greenAudio.type = 'audio/mp3';
-
+const greenAudio = new Audio("../simon-says/sounds/green.mp3");
+const redAudio = new Audio("../simon-says/sounds/red.mp3");
+const blueAudio = new Audio("../simon-says/sounds/blue.mp3");
+const yellowAudio = new Audio("../simon-says/sounds/yellow.mp3");
 
 start.addEventListener("click", function() {
     level.innerHTML = levelNumber.toString();
@@ -28,37 +26,38 @@ element.classList.remove("unclickable");
 greenTile.addEventListener("click", function() {
     changeColorOpacity("green");
     userOrder.push("green");
-    greenTile.appendChild(greenAudio);;
+    greenAudio.play();
     checkUserChoice();
 });
 
 redTile.addEventListener("click", function() {
     changeColorOpacity("red");
     userOrder.push("red");
-    
+    redAudio.play();
     checkUserChoice();
 });
 
 blueTile.addEventListener("click", function() {
     changeColorOpacity("blue");
     userOrder.push("blue");
-   
+    bluenAudio.play();
     checkUserChoice();
 });
 
 yellowTile.addEventListener("click", function() {
     changeColorOpacity("yellow");
     userOrder.push("yellow");
-    
+    blueAudio.play();
     checkUserChoice();
 });
 
 function addRandomColor() {
     const colors = ["red", "green", "blue", "yellow"];
     
-    for (let i = 0; i < levelNumber; i++) {
+    for (let i = 1; i <= levelNumber; i++) {
         setTimeout(() => {
-            for (let j = 0; j <= i; j++) {
+            for (let j = 0; j < i; j++) {
+                console.log("j is " + j + " i is " + i);
                 const randomIndex = Math.floor(Math.random() * 4);
                 const randomColor = colors[randomIndex];
                 colorsOrder.push(randomColor);
@@ -96,10 +95,12 @@ function getSound() {
 };
 
 function areEqualArrays(array1, array2) {
+    console.log("comparing " + array1.length + " to " + array2.length);
     if (array1.length !== array2.length) {
         return false;
     } else {
         for (let i = 0; i < array1.length; i++) {
+            console.log("comparing " + array1[i] + " to " + array2[i]);
             if (array1[i] !== array2[i]) {
                 return false;
             }
@@ -110,7 +111,7 @@ function areEqualArrays(array1, array2) {
 
 function checkUserChoice() {
     if (areEqualArrays(colorsOrder, userOrder)) {
-        if (levelNumber <= 11) {
+        if (levelNumber <= 12) {
             startNextLevel();
         } else {
             alert("Congratulations! You completed all levels!");
