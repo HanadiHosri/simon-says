@@ -1,4 +1,6 @@
 let colorsOrder = [];
+let highscore = document.getElementById("high-score");
+let level = document.getElementById("level");
 const start = document.getElementById("play");
 const greenTile = document.querySelector(".tile.green.inactive");
 const redTile = document.querySelector(".tile.red.inactive");
@@ -7,6 +9,7 @@ const yellowTile = document.querySelector(".tile.yellow.inactive");
 
 
 start.addEventListener("click", function() {
+    level.innerHTML = 1;
     addRandomColor();
     changeColorOpacity()
     getSound();
@@ -73,14 +76,21 @@ function getSound() {
 };
 
 function handleTileClick(clickedColor) {
-    console.log(clickedColor);
-    const correctColor = colorsOrder.shift(); // the shift method removes and returns the first element of colorsOrder
-    console.log(correctColor);
-    if (clickedColor == correctColor) {       
-        addRandomColor();
-        changeColorOpacity();
-    } else {
-        //game over sound
-        colorsOrder = [];
-    };
+    for (let i = 0; i < colorsOrder.length; i++) {
+        console.log(clickedColor);
+        const correctColor = colorsOrder[i];
+        console.log(correctColor);
+        if (clickedColor == correctColor) { 
+            level ++;
+            highscore += 10;
+            addRandomColor();
+            changeColorOpacity();
+            
+        } else {
+            //wrong sound
+            //game over sound
+            colorsOrder = [];
+        };
+    }
+
 };
