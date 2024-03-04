@@ -1,4 +1,5 @@
 let colorsOrder = [];
+let userOrder = [];
 let highscore = document.getElementById("high-score");
 let level = document.getElementById("level");
 let highscoreNumber = 0;
@@ -13,8 +14,6 @@ const yellowTile = document.querySelector(".tile.yellow.inactive");
 start.addEventListener("click", function() {
     level.innerHTML = levelNumber.toString();
     addRandomColor();
-    changeColorOpacity()
-    getSound();
 });
 
 const element = document.querySelector(".board");
@@ -22,18 +21,22 @@ element.classList.remove("unclickable");
 
 greenTile.addEventListener("click", function() {
     changeColorOpacity("green");
+    userOrder.push("green");
 });
 
 redTile.addEventListener("click", function() {
     changeColorOpacity("red");
+    userOrder.push("red");
 });
 
 blueTile.addEventListener("click", function() {
     changeColorOpacity("blue");
+    userOrder.push("blue");
 });
 
 yellowTile.addEventListener("click", function() {
     changeColorOpacity("yellow");
+    userOrder.push("yellow");
 });
 
 function addRandomColor() {
@@ -72,6 +75,6 @@ function getSound() {
 
 };
 
-function checkUserChoice() {
-    
+function checkUserChoice(chosenColor) {
+
 };
