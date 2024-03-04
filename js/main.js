@@ -10,6 +10,12 @@ const redTile = document.querySelector(".tile.red.inactive");
 const blueTile = document.querySelector(".tile.blue.inactive");
 const yellowTile = document.querySelector(".tile.yellow.inactive");
 
+const greenAudio = document.createElement('audio');
+greenAudio.id = 'audio-player';
+greenAudio.autoplay = true;
+greenAudio.src = '../simon-says/sounds/green.mp3';
+greenAudio.type = 'audio/mp3';
+
 
 start.addEventListener("click", function() {
     level.innerHTML = levelNumber.toString();
@@ -22,35 +28,45 @@ element.classList.remove("unclickable");
 greenTile.addEventListener("click", function() {
     changeColorOpacity("green");
     userOrder.push("green");
+    greenTile.appendChild(greenAudio);;
     checkUserChoice();
 });
 
 redTile.addEventListener("click", function() {
     changeColorOpacity("red");
     userOrder.push("red");
+    
     checkUserChoice();
 });
 
 blueTile.addEventListener("click", function() {
     changeColorOpacity("blue");
     userOrder.push("blue");
+   
     checkUserChoice();
 });
 
 yellowTile.addEventListener("click", function() {
     changeColorOpacity("yellow");
     userOrder.push("yellow");
+    
     checkUserChoice();
 });
 
 function addRandomColor() {
     const colors = ["red", "green", "blue", "yellow"];
-    const randomColor = colors[Math.floor(Math.random()*4)];
-    colorsOrder.push(randomColor);
-    changeColorOpacity(randomColor);
     
-};
-
+    for (let i = 0; i < levelNumber; i++) {
+        setTimeout(() => {
+            for (let j = 0; j <= i; j++) {
+                const randomIndex = Math.floor(Math.random() * 4);
+                const randomColor = colors[randomIndex];
+                colorsOrder.push(randomColor);
+                changeColorOpacity(randomColor);
+            }
+        },i * 1000);
+    }
+}
 function changeColorOpacity(color) {
     if (color == "green"){
         greenTile.style.opacity = 1;
@@ -94,13 +110,17 @@ function areEqualArrays(array1, array2) {
 
 function checkUserChoice() {
     if (areEqualArrays(colorsOrder, userOrder)) {
-        startNextLevel();
+        if (levelNumber <= 11) {
+            startNextLevel();
+        } else {
+            alert("Congratulations! You completed all levels!");
+        };
     } else {
         colorsOrder = [];
         userOrder = [];
         level.innerHTML = "1";
         highscore.innerHTML = "0";
-    }
+    };
 };
 
 function startNextLevel() {
