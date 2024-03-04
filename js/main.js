@@ -21,25 +21,26 @@ const element = document.querySelector(".board");
 element.classList.remove("unclickable");
 
 greenTile.addEventListener("click", function() {
-    handleTileClick("green");
+    changeColorOpacity("green");
 });
 
 redTile.addEventListener("click", function() {
-    handleTileClick("red");
+    changeColorOpacity("red");
 });
 
 blueTile.addEventListener("click", function() {
-    handleTileClick("blue");
+    changeColorOpacity("blue");
 });
 
 yellowTile.addEventListener("click", function() {
-    handleTileClick("yellow");
+    changeColorOpacity("yellow");
 });
 
 function addRandomColor() {
     const colors = ["red", "green", "blue", "yellow"];
     const randomColor = colors[Math.floor(Math.random()*4)];
     colorsOrder.push(randomColor);
+    changeColorOpacity(randomColor);
     
 };
 
@@ -71,6 +72,6 @@ function getSound() {
 
 };
 
-function handleTileClick(clickedColor) {
-
-}
+function checkUserChoice() {
+    
+};
